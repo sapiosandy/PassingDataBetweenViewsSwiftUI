@@ -8,14 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var message = ""
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack (spacing: 25) {
+                TextField("Type something here", text: $message)
+                
+                NavigationLink {
+                    SameFileView(passedData: message)
+                } label : {
+                    Text("Go to structure in same file ")
+                }
+            }
         }
-        .padding()
+    }
+}
+
+struct SameFileView: View {
+    var passedData: String
+    
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .foregroundColor(Color.green)
+            Text ("This is what you typed: \(passedData)")
+        }
     }
 }
 
